@@ -8,6 +8,7 @@ use DateTimeImmutable;
 use Exception;
 use PDO;
 use PDOStatement;
+use RuntimeException;
 
 class PdoStudentRepository implements StudentRepository
 {
@@ -87,6 +88,10 @@ class PdoStudentRepository implements StudentRepository
     {
         $insertQuery = 'INSERT INTO students (name, birth_date) VALUES (:name, :birth_date);';
         $stmt = $this->connection->prepare($insertQuery);
+
+        if ($stmt === false){
+            throw new RuntimeException('Erro na query do banco');
+        }
 
         $success = $stmt->execute(
             [
