@@ -12,7 +12,7 @@ $createTableSql = '
         birth_date TEXT
     );
     
-    CREATE TABLE IF EXISTS phones (
+    CREATE TABLE IF NOT EXISTS phones (
         id INTEGER PRIMARY KEY,
         area_code TEXT,
         number TExT,
@@ -22,3 +22,6 @@ $createTableSql = '
 ';
 
 $pdo->exec($createTableSql);
+
+
+$pdo->exec("INSERT INTO phones (area_code, number, student_id) VALUES ('24','22222222',1), ('21','99999999', 1)");
