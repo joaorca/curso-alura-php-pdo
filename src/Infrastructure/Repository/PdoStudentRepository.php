@@ -8,7 +8,6 @@ use DateTimeImmutable;
 use Exception;
 use PDO;
 use PDOStatement;
-use RuntimeException;
 
 class PdoStudentRepository implements StudentRepository
 {

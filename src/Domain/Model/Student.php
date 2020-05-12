@@ -7,6 +7,8 @@ class Student
     private ?int $id;
     private string $name;
     private \DateTimeInterface $birthDate;
+    /** @var Phone[] */
+    private array $phones = [];
 
     public function __construct(?int $id, string $name, \DateTimeInterface $birthDate)
     {
@@ -15,9 +17,9 @@ class Student
         $this->birthDate = $birthDate;
     }
 
-    public function defineId(int $id):void
+    public function defineId(int $id): void
     {
-        if (!is_null($this->id)){
+        if (!is_null($this->id)) {
             throw new \DomainException('Você so pode definir o ID uma vez');
         }
 
@@ -49,5 +51,18 @@ class Student
         return $this->birthDate
             ->diff(new \DateTimeImmutable())
             ->y;
+    }
+
+    public function addPhone(Phone $phone): void
+    {
+        $this->phones[] = $phone;
+    }
+
+    /**
+     * @return Phone[]
+     */
+    public function phones(): array
+    {
+        return $this->phones;
     }
 }

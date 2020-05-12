@@ -5,4 +5,20 @@ $pdo = new PDO ('sqlite:' . $caminhoBanco);
 
 echo "conectei";
 
-$pdo->exec('CREATE TABLE students (id INTEGER PRIMARY KEY, name TEXT, birth_date TEXT);');
+$createTableSql = '
+    CREATE TABLE IF NOT EXISTS students (
+        id INTEGER PRIMARY KEY, 
+        name TEXT, 
+        birth_date TEXT
+    );
+    
+    CREATE TABLE IF EXISTS phones (
+        id INTEGER PRIMARY KEY,
+        area_code TEXT,
+        number TExT,
+        student_id INTEGER,
+        FOREIGN KEY (student_id) REFERENCES students(id)
+    );   
+';
+
+$pdo->exec($createTableSql);
